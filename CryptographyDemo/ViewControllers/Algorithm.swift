@@ -47,6 +47,32 @@ protocol Cryptography {
     func decrypt(from text: String, key: String) -> String?
 }
 
+extension Cryptography {
+    fileprivate func asciiIndex(ofChar char: Character) -> UInt32 {
+        let unicodeScalars = String(char).unicodeScalars
+        
+        return unicodeScalars[unicodeScalars.startIndex].value
+    }
+    
+    fileprivate func encipherChar(char: Character, shiftBy shift: Int32, base: Character) -> Character {
+        let baseIndex = asciiIndex(ofChar: base)
+        let charIndex = asciiIndex(ofChar: char)
+        let resIndex = baseIndex + UInt32((Int32(charIndex) - Int32(baseIndex) + shift + 26) % 26)
+        
+        return Character(UnicodeScalar(resIndex)!)
+    }
+    
+    fileprivate func shiftOffset(ofChar char: Character) -> Int32 {
+        let start: Character
+        switch char {
+        case "a"..."z": start = "a"
+        case "A"..."Z": start = "A"
+        default: start = char
+        }
+        return Int32(asciiIndex(ofChar: char) - asciiIndex(ofChar: start))
+    }
+}
+
 
 // MARK: - CaesarCipher
 struct CaesarCipher: Cryptography {
@@ -78,21 +104,6 @@ struct CaesarCipher: Cryptography {
         
         return encrypt(from: text, key: newKey)
     }
-    
-    private func asciiIndex(withChar char: Character) -> UInt32 {
-        let unicodeScalars = String(char).unicodeScalars
-        
-        return unicodeScalars[unicodeScalars.startIndex].value
-    }
-    
-    private func encipherChar(char: Character, shiftBy shift: Int32, base: Character) -> Character {
-        let baseIndex = asciiIndex(withChar: base)
-        let charIndex = asciiIndex(withChar: char)
-        let resIndex = baseIndex + UInt32((Int32(charIndex) - Int32(baseIndex) + shift + 26) % 26)
-        
-        return Character(UnicodeScalar(resIndex)!)
-    }
-    
 }
 
 // MARK: - SubstitutionCipher
@@ -137,91 +148,71 @@ struct SubstitutionCipher: Cryptography {
     }
 }
 
+
+// MARK: - vigenère
+struct Vigenere: Cryptography {
+    var name = "vigenère Cipher"
+    var defaultKey = "SESAME"
+    
+    func cipherText(from text: String, key: String, encrypt: Bool) -> String? {
+        var newCharacters = [Character]()
+        
+        text.characters.enumerated().forEach { (index, ch) in
+            
+            let keyChar = getKeyChar(fromKey: key, index: index)
+        
+            let shift: Int32
+            if encrypt {
+                shift = shiftOffset(ofChar: keyChar)
+            } else {
+                shift = -shiftOffset(ofChar: keyChar)
+            }
+            
+            let cipherChar: Character
+            switch ch {
+            case "a"..."z": cipherChar = encipherChar(char: ch, shiftBy: shift, base: "a")
+            case "A"..."Z": cipherChar = encipherChar(char: ch, shiftBy: shift, base: "A")
+            default: cipherChar = ch
+            }
+            
+            newCharacters.append(cipherChar)
+        }
+        
+        return String(newCharacters)
+    }
+    
+    private func getKeyChar(fromKey key: String, index: Int) -> Character {
+        let offset = index % key.characters.count
+        let index = key.index(key.startIndex, offsetBy: offset)
+        let keyChar = key[index]
+        
+        return keyChar
+    }
+    
+    func encrypt(from text: String, key: String) -> String? {
+        return cipherText(from: text, key: key, encrypt: true)
+    }
+    
+    func decrypt(from text: String, key: String) -> String? {
+        return cipherText(from: text, key: key, encrypt: false)
+    }
+}
+
 // MARK: - Enigma
 struct Enigma: Cryptography {
     var name = "Enigma"
     var defaultKey = "default key"
     
     func encrypt(from text: String, key: String) -> String? {
-        guard let shift = Int(key) else {
-            return nil
-        }
-        
-        let newCharacters = text.characters.map { ch -> Character in
-            let res: Character
-            switch ch {
-            case "a"..."z": res = encipherChar(char: ch, shiftBy: shift, base: "a")
-            case "A"..."Z": res = encipherChar(char: ch, shiftBy: shift, base: "A")
-            default: res = ch
-            }
-            return res
-        }
-        
-        return String(newCharacters)
+        return nil
     }
     
     func decrypt(from text: String, key: String) -> String? {
-        guard let newKey = key.reversedIntString() else {
-            return nil
-        }
-        
-        return encrypt(from: text, key: newKey)
-    }
-    
-    private func encipherChar(char: Character, shiftBy: Int, base: Character) -> Character {
-        let start = String(base).unicodeScalars
-        
-        let value = start[start.startIndex].value
-        
-        let index = (Int(value) + shiftBy) % 26
-        
-        return Character(UnicodeScalar(index)!)
+        return nil
     }
     
 }
 
 
-// MARK: - vigenère
-struct Vigenere: Cryptography {
-    var name = "Enigma"
-    var defaultKey = "default key"
-    
-    func encrypt(from text: String, key: String) -> String? {
-        guard let shift = Int(key) else {
-            return nil
-        }
-        
-        let newCharacters = text.characters.map { ch -> Character in
-            let res: Character
-            switch ch {
-            case "a"..."z": res = encipherChar(char: ch, shiftBy: shift, base: "a")
-            case "A"..."Z": res = encipherChar(char: ch, shiftBy: shift, base: "A")
-            default: res = ch
-            }
-            return res
-        }
-        
-        return String(newCharacters)
-    }
-    
-    func decrypt(from text: String, key: String) -> String? {
-        guard let newKey = key.reversedIntString() else {
-            return nil
-        }
-        
-        return encrypt(from: text, key: newKey)
-    }
-    
-    private func encipherChar(char: Character, shiftBy: Int, base: Character) -> Character {
-        let start = String(base).unicodeScalars
-        
-        let value = start[start.startIndex].value
-        
-        let index = (Int(value) + shiftBy) % 26
-        
-        return Character(UnicodeScalar(index)!)
-    }
-
-}
 
 
