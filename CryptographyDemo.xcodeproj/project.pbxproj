@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070DD6871F458524001D52A5 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070DD6861F458524001D52A5 /* IntExtensions.swift */; };
 		07197FC51F417C3A0018E572 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07197FC41F417C3A0018E572 /* AppDelegate.swift */; };
 		07197FCA1F417C3A0018E572 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07197FC81F417C3A0018E572 /* Main.storyboard */; };
 		07197FCC1F417C3A0018E572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07197FCB1F417C3A0018E572 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 		07197FFE1F41904A0018E572 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07197FFD1F41904A0018E572 /* DemoViewController.swift */; };
 		071980021F419B400018E572 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071980011F419B400018E572 /* Algorithm.swift */; };
 		071980041F42A1780018E572 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071980031F42A1780018E572 /* StringExtensions.swift */; };
+		07C9F0D31F459358005ECD69 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C9F0D21F459358005ECD69 /* DictionaryExtensions.swift */; };
 		E5632ABDFE6A428F3D0125F3 /* Pods_CryptographyDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6480A8F4711EE4A05050F34 /* Pods_CryptographyDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		070DD6861F458524001D52A5 /* IntExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		07197FC11F417C3A0018E572 /* CryptographyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptographyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07197FC41F417C3A0018E572 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07197FC91F417C3A0018E572 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		07197FFD1F41904A0018E572 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		071980011F419B400018E572 /* Algorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
 		071980031F42A1780018E572 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		07C9F0D21F459358005ECD69 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
 		0DF11E1DE956EEB0745A30DE /* Pods-CryptographyDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptographyDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CryptographyDemo/Pods-CryptographyDemo.release.xcconfig"; sourceTree = "<group>"; };
 		51FB7E4BA46BDC1503049A2F /* Pods-CryptographyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptographyDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CryptographyDemo/Pods-CryptographyDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		D6480A8F4711EE4A05050F34 /* Pods_CryptographyDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CryptographyDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,7 +168,9 @@
 				07197FFB1F418D550018E572 /* CryptographyViewController.swift */,
 				07197FFD1F41904A0018E572 /* DemoViewController.swift */,
 				071980011F419B400018E572 /* Algorithm.swift */,
+				070DD6861F458524001D52A5 /* IntExtensions.swift */,
 				071980031F42A1780018E572 /* StringExtensions.swift */,
+				07C9F0D21F459358005ECD69 /* DictionaryExtensions.swift */,
 				07197FF81F4180AF0018E572 /* Enigma */,
 			);
 			path = ViewControllers;
@@ -389,8 +395,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070DD6871F458524001D52A5 /* IntExtensions.swift in Sources */,
 				071980041F42A1780018E572 /* StringExtensions.swift in Sources */,
 				07197FC51F417C3A0018E572 /* AppDelegate.swift in Sources */,
+				07C9F0D31F459358005ECD69 /* DictionaryExtensions.swift in Sources */,
 				07197FF71F417FAF0018E572 /* BaseViewController.swift in Sources */,
 				07197FFC1F418D550018E572 /* CryptographyViewController.swift in Sources */,
 				07197FFE1F41904A0018E572 /* DemoViewController.swift in Sources */,
